@@ -99,13 +99,25 @@ app.post("/cliente",async (req, res) => {
     try{
         const [rows] = await db.query("Insert into cliente(nome,cpf,telefone,email) values (?,?,?,?)",
          [cliente.nome, cliente.cpf, cliente.telefone,cliente.email]);
+         if (cliente.nome == null) {
+            res.json(rows[0]); 
+        }
+        if (cliente.cpf == null) {
+            res.json(rows[0]); 
+        }
+        if (cliente.telefone == null) {
+            res.json(rows[0]); 
+        }
+        if (cliente.email == null) {
+            res.json(rows[0]); 
+        }
 
         cliente.id = rows.insertId;
 
         res.status(201).json(cliente);
     }catch(error){
-        console.log("Erro ao cadastrar cliente: " + error.message);
-        res.status(500).send("Erro ao cadastrar clientes")
+        console.log("Erro ao cadastrar clinte: " + error.message);
+        res.status(500).send("Erro ao cadastrar")
     }
 });
 
@@ -119,6 +131,19 @@ app.post("/filmes",async (req, res) => {
          [filmes.titulo, filmes.genero, filmes.ano_Lancamento,filmes.classificacao_Indicativo]);
 
          filmes.id = rows.insertId;
+
+         if (filmes.titulo == null) {
+            res.json(rows[0]); 
+        }
+        if (filmes.genero == null) {
+            res.json(rows[0]); 
+        }
+        if (filmes.ano_Lancamento == null) {
+            res.json(rows[0]); 
+        }
+        if (filmes.classificacao_Indicativo == null) {
+            res.json(rows[0]); 
+        }
 
         res.status(201).json(filmes);
     }catch(error){
@@ -137,7 +162,17 @@ app.post("/locacao",async (req, res) => {
          [locacao.id_cliente, locacao.data_locacao,locacao.data_devolucao]);
 
          locacao.id = rows.insertId;
-
+         
+         if (locacao.id_cliente == null) {
+            res.json(rows[0]); 
+        }
+        if (locacao.data_locacao == null) {
+            res.json(rows[0]); 
+        }
+        if (locacao.data_devolucao == null) {
+            res.json(rows[0]); 
+        }
+    
         res.status(201).json(locacao);
     }catch(error){
         console.log("Erro ao cadastrar locacao: " + error.message);
@@ -157,6 +192,20 @@ app.put("/cliente/:id",async (req, res) => {
              [cliente.nome, cliente.cpf, cliente.telefone,cliente.email, id])
 
              cliente.id = id;
+
+             if (cliente.nome == null) {
+                res.json(rows[0]); 
+            }
+            if (cliente.cpf == null) {
+                res.json(rows[0]); 
+            }
+            if (cliente.telefone == null) {
+                res.json(rows[0]); 
+            }
+            if (cliente.email == null) {
+                res.json(rows[0]); 
+            }
+    
 
              res.status(200).json(cliente);
         }
@@ -181,6 +230,20 @@ app.put("/filmes/:id",async (req, res) => {
 
              filmes.id = id;
 
+             if (filmes.titulo == null) {
+                res.json(rows[0]); 
+            }
+            if (filmes.genero == null) {
+                res.json(rows[0]); 
+            }
+            if (filmes.ano_Lancamento == null) {
+                res.json(rows[0]); 
+            }
+            if (filmes.classificacao_Indicativo == null) {
+                res.json(rows[0]); 
+            }
+    
+
              res.status(200).json(filmes);
         }
         res.status(404).send("filmes com id:" + id + " não encontrado!")
@@ -203,6 +266,16 @@ app.put("/locacao/:id",async (req, res) => {
              [locacao.id_cliente, locacao.data_locacao,locacao.data_devolucao,id])
 
              locacao.id = id;
+
+             if (locacao.id_cliente == null) {
+                res.json(rows[0]); 
+            }
+            if (locacao.data_locacao == null) {
+                res.json(rows[0]); 
+            }
+            if (locacao.data_devolucao == null) {
+                res.json(rows[0]); 
+            }
 
              res.status(200).json(locacao);
         }
